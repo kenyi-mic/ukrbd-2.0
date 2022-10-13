@@ -4,12 +4,18 @@ import {
   Platform,
   StatusBar,
   StyleSheet,
+  View,
+  Image,
   ScrollView,
+  TouchableOpacity,
 } from "react-native";
 import React from "react";
-import { useRoute } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import MobileHeader from "../components/Header/MobileHeader";
-
+import { urlFor } from "../sanity";
+import { MinusCircleIcon, PlusCircleIcon } from "react-native-heroicons/solid";
+import { selectBasketItems } from "../features/basketSlice";
+import { useSelector } from "react-redux";
 import ItemCard from "../components/ItemCard";
 
 const CartScreen = () => {
@@ -26,7 +32,6 @@ const CartScreen = () => {
         </Text>
         {items.map((item) => (
           <ItemCard
-            key={item.id}
             id={item.id}
             title={item.name}
             description={item.description}

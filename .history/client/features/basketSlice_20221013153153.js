@@ -24,8 +24,9 @@ export const basketSlice = createSlice({
           `Can't remove product(id: ${action.payload.id}) as its not in basket.`
         );
       }
-
-      state.items = newBasket;
+    },
+    incrementByAmount: (state, action) => {
+      state.value += action.payload;
     },
   },
 });

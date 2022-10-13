@@ -1,23 +1,15 @@
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import React from "react";
 import { urlFor } from "../sanity";
-import { MinusCircleIcon, PlusCircleIcon } from "react-native-heroicons/solid";
-import { useDispatch, useSelector } from "react-redux";
 import {
-  addToBasket,
-  selectBasketItems,
-  selectBasketItemsWithID,
-} from "../features/basketSlice";
+  MinusCircleIcon,
+  PlusCircleIcon,
+  XMarkIcon,
+} from "react-native-heroicons/solid";
+import { useDispatch, useSelector } from "react-redux";
+import { addToBasket, selectBasketItems } from "../features/basketSlice";
 
-const BasketItems = ({
-  id,
-  name,
-  image,
-  images,
-  description,
-  price,
-  rating,
-}) => {
+const ItemCard = ({ id, name, image, images, description, price, rating }) => {
   const dispatch = useDispatch();
   const addItemToBasket = () => {
     dispatch(addToBasket({ id, name, image, description, price, rating }));
@@ -43,10 +35,14 @@ const BasketItems = ({
                   <PlusCircleIcon color="#FF9900" size={30} />
                 </TouchableOpacity>
                 {items.length > 0 && (
-                  <Text className="text-lg font-bold">{items.length}</Text>
+                  <Text className="text-lg font-bold">1</Text>
                 )}
                 <TouchableOpacity>
                   <MinusCircleIcon color="#FF9900" size={30} />
+                </TouchableOpacity>
+
+                <TouchableOpacity>
+                  <XMarkIcon color="black" size={30} />
                 </TouchableOpacity>
               </View>
             </View>
@@ -57,4 +53,4 @@ const BasketItems = ({
   );
 };
 
-export default BasketItems;
+export default ItemCard;

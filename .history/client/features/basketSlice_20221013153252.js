@@ -27,6 +27,9 @@ export const basketSlice = createSlice({
 
       state.items = newBasket;
     },
+    incrementByAmount: (state, action) => {
+      state.value += action.payload;
+    },
   },
 });
 
