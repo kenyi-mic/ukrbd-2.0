@@ -6,7 +6,6 @@ import {
   StyleSheet,
   Platform,
   StatusBar,
-  TouchableOpacity,
 } from "react-native";
 import React from "react";
 import {
@@ -18,9 +17,7 @@ const MobileHeader = () => {
   return (
     <SafeAreaView style={styles.container}>
       <View className="flex flex-row items-center justify-center p-4 ">
-        <TouchableOpacity>
-          <AdjustmentsHorizontalIcon color="black" size={30} />
-        </TouchableOpacity>
+        <AdjustmentsHorizontalIcon color="gold" size={30} />
         <View className="flex flex-row items-center bg-white p-2 w-11/12 shadow-md rounded-lg mx-2">
           <MagnifyingGlassIcon color="black" size={20} />
           <TextInput
