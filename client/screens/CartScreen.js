@@ -19,6 +19,8 @@ import {
   selectTotal,
 } from "../features/basketSlice";
 import Currency from "react-currency-formatter";
+import { withAuthenticator } from "aws-amplify-react-native";
+import { Auth } from "aws-amplify";
 
 const CartScreen = (id) => {
   const items = useSelector(selectBasketItems);
@@ -79,4 +81,4 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
-export default CartScreen;
+export default withAuthenticator(CartScreen);
