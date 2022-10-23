@@ -13,6 +13,7 @@ import CategoryScreen from "../screens/CategoryScreen";
 import AccountScreen from "../screens/AccountScreen";
 import SelectPhotosScreen from "../screens/SelectPhotosScreen";
 import ProfileImageScreen from "../screens/ProfileImageScreen";
+import EditProfileScreen from "../screens/EditProfileScreen";
 
 const AppStack = () => {
   const Stack = createNativeStackNavigator();
@@ -43,6 +44,11 @@ const AppStack = () => {
         <Stack.Screen
           name="select profile image"
           component={ProfileImageScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="edit profile"
+          component={EditProfileScreen}
           options={{ headerShown: false }}
         />
         <Stack.Screen
