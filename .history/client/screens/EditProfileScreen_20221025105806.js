@@ -6,11 +6,9 @@ import {
   Platform,
   StyleSheet,
   TextInput,
-  TouchableOpacity,
 } from "react-native";
 import React from "react";
 import ProductsHeader from "../components/Header/ProductsHeader";
-import GooglePlacesInput from "../components/GooglePlacesInput";
 
 const EditProfileScreen = () => {
   return (
@@ -27,33 +25,13 @@ const EditProfileScreen = () => {
             className="p-3 w-full text-lg"
           />
         </View>
-
-        <Text className="pl-3 text-lg">Your Email Address</Text>
         <View className="border-2 border-gray-400 mx-3 my-2 ">
           <TextInput
             textContentType="emailAddress"
-            placeholder="Enter Email adress..."
+            placeholder="Enter your name..."
             className="p-3 w-full text-lg"
           />
         </View>
-        <Text className="pl-3 text-lg">Choose your location</Text>
-        <View className="mx-1 my-2 py-10">
-          <GooglePlacesInput />
-        </View>
-
-        <Text className="pl-3 text-lg">Your phone number</Text>
-        <View className="border-2 border-gray-400 mx-3 my-2 ">
-          <TextInput
-            textContentType="number"
-            placeholder="+19123293233"
-            className="p-3 w-full text-lg"
-          />
-        </View>
-        <TouchableOpacity className="bg-yellow-500 w-auto p-2">
-          <Text className="text-lg font-bold text-gray-200">
-            Save the Change
-          </Text>
-        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );

@@ -6,7 +6,6 @@ import {
   Platform,
   StyleSheet,
   TextInput,
-  TouchableOpacity,
 } from "react-native";
 import React from "react";
 import ProductsHeader from "../components/Header/ProductsHeader";
@@ -45,15 +44,10 @@ const EditProfileScreen = () => {
         <View className="border-2 border-gray-400 mx-3 my-2 ">
           <TextInput
             textContentType="number"
-            placeholder="+19123293233"
+            placeholder="Enter Email adress..."
             className="p-3 w-full text-lg"
           />
         </View>
-        <TouchableOpacity className="bg-yellow-500 w-auto p-2">
-          <Text className="text-lg font-bold text-gray-200">
-            Save the Change
-          </Text>
-        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );

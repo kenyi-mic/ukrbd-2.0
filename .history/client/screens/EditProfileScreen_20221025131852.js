@@ -50,9 +50,7 @@ const EditProfileScreen = () => {
           />
         </View>
         <TouchableOpacity className="bg-yellow-500 w-auto p-2">
-          <Text className="text-lg font-bold text-gray-200">
-            Save the Change
-          </Text>
+          <Text>Save the Change</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
