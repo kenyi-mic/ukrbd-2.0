@@ -8,9 +8,9 @@ import {
   Pressable,
   TouchableOpacity,
 } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import { urlFor } from "../sanity";
+import sanityClient, { urlFor } from "../sanity";
 import Currency from "react-currency-formatter";
 import {
   ArrowLeftCircleIcon,
@@ -32,7 +32,7 @@ const { width, height } = Dimensions.get("screen");
 const ProductDetails = () => {
   const navigation = useNavigation();
   const {
-    params: { id, name, image, images, description, price, rating },
+    params: { id, name, image, description, price, rating },
   } = useRoute();
   const dispatch = useDispatch();
   const items = useSelector(selectBasketItems);
@@ -44,6 +44,28 @@ const ProductDetails = () => {
   };
 
   const removeItemFromBasket = () => dispatch(removeFromBasket({ id }));
+
+  const [images, setImages] = useState();
+
+  useEffect(() => {
+    sanityClient
+      .fetch(
+        ` *[_type == "product" && _id == $id]{
+        ...,
+       images[]->{
+         ...,
+       }
+        
+        
+      }[0]`
+      )
+      .then((data) => {
+        setImages(data.images);
+      });
+  }, [id]);
+
+  console.log(images);
+
   return (
     <ScrollView>
       <View key={id} style={styles.container}>
@@ -52,8 +74,9 @@ const ProductDetails = () => {
             style={styles.mainImage}
             source={{ uri: urlFor(image).url() }}
           />
-          {/* product carousel */}
-          <ProductCarousel />
+          {/*product carousel*/}
+
+          <ProductCarousel images={images} />
 
           {/*back bottom*/}
           <TouchableOpacity

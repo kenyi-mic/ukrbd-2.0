@@ -4,10 +4,7 @@ import Product from "../components/Product";
 
 const ProductRow = ({ id, name, products }) => {
   return (
-    <View key={id} className="">
-      {products.map((item) => {
-        console.log(item?.images);
-      })}
+    <View className="">
       <Text className="px-4 py-2 font-bold text-xl">{name}</Text>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         <View className="flex flex-row ">

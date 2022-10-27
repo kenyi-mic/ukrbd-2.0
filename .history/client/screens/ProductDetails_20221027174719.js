@@ -52,8 +52,7 @@ const ProductDetails = () => {
             style={styles.mainImage}
             source={{ uri: urlFor(image).url() }}
           />
-          {/* product carousel */}
-          <ProductCarousel />
+          {/*product carousel*/}
 
           {/*back bottom*/}
           <TouchableOpacity
