@@ -5,6 +5,7 @@ import Carousel from "../components/Carousel/HomeCarousel";
 import Categories from "../components/Categories";
 import FeaturedRow from "../components/FeaturedRow";
 import sanityClient from "../sanity";
+import axios, * as others from "axios";
 
 const HomeScreen = () => {
   const [featuredCategory, setFeaturedCategory] = useState([]);
@@ -12,9 +13,7 @@ const HomeScreen = () => {
 
   const getProducts = async () => {
     try {
-      const response = await fetch(
-        "https://ukrbd.com:2083/cpsess2994734552/3rdparty/phpMyAdmin/index.php"
-      );
+      const response = await fetch("http://localhost:3000/api/products");
       const json = await response.json();
       setData(json.products);
     } catch (error) {

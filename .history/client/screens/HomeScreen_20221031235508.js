@@ -1,4 +1,4 @@
-import { View, StyleSheet, ScrollView } from "react-native";
+import { View, Text, StyleSheet, Dimensions, ScrollView } from "react-native";
 import React, { useEffect, useState } from "react";
 import MobileHeader from "../components/Header/MobileHeader";
 import Carousel from "../components/Carousel/HomeCarousel";
@@ -8,24 +8,8 @@ import sanityClient from "../sanity";
 
 const HomeScreen = () => {
   const [featuredCategory, setFeaturedCategory] = useState([]);
-  const [data, setData] = useState();
-
-  const getProducts = async () => {
-    try {
-      const response = await fetch(
-        "https://ukrbd.com:2083/cpsess2994734552/3rdparty/phpMyAdmin/index.php"
-      );
-      const json = await response.json();
-      setData(json.products);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  console.log(data);
 
   useEffect(() => {
-    getProducts;
     sanityClient
       .fetch(
         `*[_type == "featured"]{
@@ -43,6 +27,18 @@ const HomeScreen = () => {
       });
   }, []);
 
+  const getMoviesFromApiAsync = async () => {
+    try {
+      const response = await fetch("https://reactnative.dev/movies.json");
+      const json = await response.json();
+
+      return json.movies;
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  console.log(getMoviesFromApiAsync.name);
   return (
     <View style={styles.container}>
       <MobileHeader />

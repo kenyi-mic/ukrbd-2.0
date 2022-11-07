@@ -11,6 +11,7 @@ import { useRoute } from "@react-navigation/native";
 
 import ProductsHeader from "../components/Header/ProductsHeader";
 import { urlFor } from "../sanity";
+import { Image } from "react-native";
 import FashionCarousel from "../components/Carousel/FashionCarousel";
 
 const CollectionScreen = () => {

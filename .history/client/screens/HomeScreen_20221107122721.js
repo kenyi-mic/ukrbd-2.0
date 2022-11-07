@@ -1,31 +1,25 @@
-import { View, StyleSheet, ScrollView } from "react-native";
+import { View, Text, StyleSheet, Dimensions, ScrollView } from "react-native";
 import React, { useEffect, useState } from "react";
 import MobileHeader from "../components/Header/MobileHeader";
 import Carousel from "../components/Carousel/HomeCarousel";
 import Categories from "../components/Categories";
 import FeaturedRow from "../components/FeaturedRow";
 import sanityClient from "../sanity";
+import axios, * as others from "axios";
 
 const HomeScreen = () => {
   const [featuredCategory, setFeaturedCategory] = useState([]);
-  const [data, setData] = useState();
 
-  const getProducts = async () => {
-    try {
-      const response = await fetch(
-        "https://ukrbd.com:2083/cpsess2994734552/3rdparty/phpMyAdmin/index.php"
-      );
-      const json = await response.json();
-      setData(json.products);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  axios
+    .fetch(`http://localhost:3000/api/products`)
+    .then((response) => console.log(response.data));
 
   console.log(data);
 
   useEffect(() => {
-    getProducts;
     sanityClient
       .fetch(
         `*[_type == "featured"]{

@@ -1,4 +1,4 @@
-import { View, StyleSheet, ScrollView } from "react-native";
+import { View, Text, StyleSheet, Dimensions, ScrollView } from "react-native";
 import React, { useEffect, useState } from "react";
 import MobileHeader from "../components/Header/MobileHeader";
 import Carousel from "../components/Carousel/HomeCarousel";
@@ -8,24 +8,18 @@ import sanityClient from "../sanity";
 
 const HomeScreen = () => {
   const [featuredCategory, setFeaturedCategory] = useState([]);
-  const [data, setData] = useState();
 
-  const getProducts = async () => {
-    try {
-      const response = await fetch(
-        "https://ukrbd.com:2083/cpsess2994734552/3rdparty/phpMyAdmin/index.php"
-      );
-      const json = await response.json();
-      setData(json.products);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  console.log(data);
+  const [data, setData] = useState([]);
 
   useEffect(() => {
-    getProducts;
+    fetch(
+      `https://ukrbd.com:2083/cpsess0809663817/3rdparty/phpMyAdmin/db_structure.php?server=1&db=ukrbdcom_db`
+    )
+      .then((response) => response.json)
+      .then((json) => setData(json));
+  });
+
+  useEffect(() => {
     sanityClient
       .fetch(
         `*[_type == "featured"]{
