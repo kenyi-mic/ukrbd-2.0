@@ -1,9 +1,17 @@
 import { View, Text, Image, Pressable } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 
-const CategoryCard = ({ id, imgUrl, title, products }) => {
-  console.log(imgUrl);
+const CategoryCard = ({ id, imgUrl, title }) => {
+  const [products, setProducts] = useState();
+
+  useEffect(() => {
+    fetch(`http://192.168.5.245:3000/api/products`)
+      .then((response) => response.json())
+      .then((data) => {
+        setProducts(data);
+      });
+  }, []);
   const navigation = useNavigation();
   return (
     <Pressable
@@ -12,7 +20,6 @@ const CategoryCard = ({ id, imgUrl, title, products }) => {
           id,
           imgUrl,
           title,
-          products,
         })
       }
       className="items-center m-2"

@@ -3,7 +3,6 @@ import React from "react";
 import { useNavigation } from "@react-navigation/native";
 
 const CategoryCard = ({ id, imgUrl, title, products }) => {
-  console.log(imgUrl);
   const navigation = useNavigation();
   return (
     <Pressable
@@ -17,7 +16,7 @@ const CategoryCard = ({ id, imgUrl, title, products }) => {
       }
       className="items-center m-2"
     >
-      <Image className="w-20 h-20 rounded-full" source={{ uri: imgUrl }} />
+      <Image className="w-20 h-20 rounded-full" source={require(imgUrl)} />
       <Text className="text-sm font-semibold text-gray-700">{title}</Text>
     </Pressable>
   );

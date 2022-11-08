@@ -3,7 +3,6 @@ import React from "react";
 import { useNavigation } from "@react-navigation/native";
 
 const CategoryCard = ({ id, imgUrl, title, products }) => {
-  console.log(imgUrl);
   const navigation = useNavigation();
   return (
     <Pressable

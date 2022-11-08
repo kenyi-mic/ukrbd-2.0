@@ -1,4 +1,4 @@
-import { View, StyleSheet, ScrollView, Text } from "react-native";
+import { View, StyleSheet, ScrollView } from "react-native";
 import React, { useEffect, useState } from "react";
 import MobileHeader from "../components/Header/MobileHeader";
 import Carousel from "../components/Carousel/HomeCarousel";
@@ -11,7 +11,7 @@ const HomeScreen = () => {
   const [data, setData] = useState();
 
   useEffect(() => {
-    fetch(`http://192.168.5.245:3000/api/products/categories`)
+    fetch(`http://192.168.5.245:3000/api/products`)
       .then((response) => response.json())
       .then((data) => setData(data))
       .catch((err) => console.log("Error ---> ", err));
@@ -55,7 +55,7 @@ const HomeScreen = () => {
         <View>
           {data?.map((item) => (
             <View key={item.id}>
-              <Text>{item.category}</Text>
+              <Text>{item.product_name}</Text>
             </View>
           ))}
         </View>

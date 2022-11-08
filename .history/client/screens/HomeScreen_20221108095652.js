@@ -55,7 +55,7 @@ const HomeScreen = () => {
         <View>
           {data?.map((item) => (
             <View key={item.id}>
-              <Text>{item.category}</Text>
+              <Text>{item.product_name}</Text>
             </View>
           ))}
         </View>

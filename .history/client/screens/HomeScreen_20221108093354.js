@@ -1,4 +1,4 @@
-import { View, StyleSheet, ScrollView, Text } from "react-native";
+import { View, StyleSheet, ScrollView } from "react-native";
 import React, { useEffect, useState } from "react";
 import MobileHeader from "../components/Header/MobileHeader";
 import Carousel from "../components/Carousel/HomeCarousel";
@@ -11,13 +11,15 @@ const HomeScreen = () => {
   const [data, setData] = useState();
 
   useEffect(() => {
-    fetch(`http://192.168.5.245:3000/api/products/categories`)
+    fetch(`http://localhost:3000/api/products`)
       .then((response) => response.json())
-      .then((data) => setData(data))
-      .catch((err) => console.log("Error ---> ", err));
+      .then((data) => setData(data));
   });
 
+  console.log(data);
+
   useEffect(() => {
+    getProducts;
     sanityClient
       .fetch(
         `*[_type == "featured"]{
@@ -52,13 +54,6 @@ const HomeScreen = () => {
             description={categories.short_description}
           />
         ))}
-        <View>
-          {data?.map((item) => (
-            <View key={item.id}>
-              <Text>{item.category}</Text>
-            </View>
-          ))}
-        </View>
       </ScrollView>
     </View>
   );

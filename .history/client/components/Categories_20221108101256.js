@@ -4,6 +4,7 @@ import CategoryCard from "./CategoryCard";
 import sanityClient, { urlFor } from "../sanity";
 
 const Categories = () => {
+  const [products, setProducts] = useState();
   const [data, setData] = useState();
 
   useEffect(() => {
@@ -13,6 +14,14 @@ const Categories = () => {
       .catch((err) => console.log("Error ---> ", err));
   });
 
+  useEffect(() => {
+    fetch(`http://192.168.5.245:3000/api/products`)
+      .then((response) => response.json())
+      .then((data) => {
+        setProducts(data);
+      });
+  }, []);
+
   return (
     <ScrollView
       horizontal
@@ -21,12 +30,7 @@ const Categories = () => {
     >
       {/*Category card*/}
       {data?.map((item) => (
-        <CategoryCard
-          key={item.id}
-          id={item.id}
-          imgUrl={item ? item?.image : " "}
-          title={item.category}
-        />
+        <CategoryCard key={item.id} imgUrl={item.image} title={item.category} />
       ))}
     </ScrollView>
   );
