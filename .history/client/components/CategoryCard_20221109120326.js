@@ -3,8 +3,8 @@ import React from "react";
 import { useNavigation } from "@react-navigation/native";
 
 const CategoryCard = ({ id, imgUrl, title, products }) => {
+  console.log(imgUrl);
   const navigation = useNavigation();
-
   return (
     <Pressable
       onPress={() =>
@@ -17,12 +17,10 @@ const CategoryCard = ({ id, imgUrl, title, products }) => {
       }
       className="items-center m-2"
     >
-      {imgUrl !== null && (
-        <Image
-          className="w-20 h-20 bg-blue-500 rounded-full"
-          source={{ uri: imgUrl }}
-        />
-      )}
+      <Image
+        className="w-20 h-20 bg-blue-500 rounded-full"
+        source={{ uri: imgUrl }}
+      />
       <Text className="text-sm font-semibold text-gray-700">{title}</Text>
     </Pressable>
   );

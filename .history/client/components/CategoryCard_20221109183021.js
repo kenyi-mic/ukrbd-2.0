@@ -4,7 +4,7 @@ import { useNavigation } from "@react-navigation/native";
 
 const CategoryCard = ({ id, imgUrl, title, products }) => {
   const navigation = useNavigation();
-
+  console.log(imgUrl);
   return (
     <Pressable
       onPress={() =>
