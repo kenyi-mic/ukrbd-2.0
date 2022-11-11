@@ -15,12 +15,12 @@ const CardTest = ({ id, name, price, image, description }) => {
 
   return (
     <View className="mx-4">
-      <Text className="font-bold text-xl">{name}</Text>
+      <Text>{name}</Text>
       <Text>{price}</Text>
       <Text>{id}</Text>
       <Text>{description}</Text>
       <Image
-        className="mx-2 mt-2"
+        className="mx-2"
         source={{ uri: image }}
         style={{ width: 200, height: 200 }}
       />

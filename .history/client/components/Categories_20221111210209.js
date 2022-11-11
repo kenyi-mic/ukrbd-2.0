@@ -19,7 +19,7 @@ const Categories = () => {
       showsHorizontalScrollIndicator={false}
     >
       {/*Category card*/}
-      {data?.map((item, index) => (
+      {data?.map((item) => (
         <CategoryCard
           key={item.id}
           id={item.id}

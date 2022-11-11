@@ -21,7 +21,7 @@ const Categories = () => {
       {/*Category card*/}
       {data?.map((item, index) => (
         <CategoryCard
-          key={item.id}
+          key={item.index}
           id={item.id}
           imgUrl={item?.category_image}
           title={item.category}
