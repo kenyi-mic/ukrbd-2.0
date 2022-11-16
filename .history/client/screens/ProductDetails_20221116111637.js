@@ -43,31 +43,31 @@ const ProductDetails = () => {
 
   const removeItemFromBasket = () => dispatch(removeFromBasket({ id }));
   return (
-    <View key={id} style={styles.container}>
-      <View className="flex flex-row justify-between  pb-4 mb-2 w-full">
-        {/*back bottom*/}
-        <TouchableOpacity
-          onPress={() => navigation.goBack()}
-          className=" top-8 left-2"
-        >
-          <ArrowLeftCircleIcon color="#FF9900" size={40} />
-        </TouchableOpacity>
-
-        {/*basket*/}
-        <TouchableOpacity
-          onPress={() => navigation.navigate("My Cart")}
-          className="top-8 right-2 "
-        >
-          <ShoppingCartIcon color="#FF9900" size={40} />
-          <Text className="absolute right-0  text-sm text-gray-600 font-bold bg-green-500 w-5 h-5  rounded-full text-center ">
-            {items.length}
-          </Text>
-        </TouchableOpacity>
-      </View>
-      <ScrollView className="my-3">
+    <ScrollView>
+      <View key={id} style={styles.container}>
         <View className="items-center">
           {/* product carousel */}
           <ProductCarousel id={id} name={name} imgContent={images} />
+          <View>
+            {/*back bottom*/}
+            <TouchableOpacity
+              onPress={() => navigation.goBack()}
+              className="absolute top-8 left-2"
+            >
+              <ArrowLeftCircleIcon color="#FF9900" size={40} />
+            </TouchableOpacity>
+
+            {/*basket*/}
+            <TouchableOpacity
+              onPress={() => navigation.navigate("My Cart")}
+              className="absolute top-8 right-2 "
+            >
+              <ShoppingCartIcon color="#FF9900" size={40} />
+              <Text className="absolute right-0 top-0  text-sm text-gray-600 font-bold bg-green-500 w-5 h-5 rounded-full text-center ">
+                {items.length}
+              </Text>
+            </TouchableOpacity>
+          </View>
         </View>
         <View className="ml-3">
           <Text className="my-2 text-xl font-semibold text-gray-600">
@@ -122,8 +122,8 @@ const ProductDetails = () => {
             </TouchableOpacity>
           </View>
         </View>
-      </ScrollView>
-    </View>
+      </View>
+    </ScrollView>
   );
 };
 

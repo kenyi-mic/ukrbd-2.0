@@ -1,4 +1,5 @@
 import {
+  Dimensions,
   Image,
   Platform,
   SafeAreaView,
@@ -44,11 +45,11 @@ const ProductsScreen = () => {
               activeOpacity={1}
               onPress={() =>
                 navigation.navigate("collection", {
-                  id: data.id,
-                  imgUrl: data.imgUrl,
-                  title: data.title,
-                  description: data.description,
-                  rows: data.rows,
+                  id,
+                  imgUrl,
+                  title,
+                  description,
+                  rows,
                 })
               }
               className="flex-row items-center space-x-2 p-4 border-y border-yellow-300"
@@ -63,7 +64,7 @@ const ProductsScreen = () => {
         </View>
         <View>
           <Text className="px-4 py-6 font-bold text-xl">Products</Text>
-          {data.rows?.map((row) => (
+          {rows?.map((row) => (
             <ProductRow
               key={row._id}
               id={row._id}

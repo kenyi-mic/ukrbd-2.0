@@ -20,9 +20,19 @@ import {
 import ProductRow from "../components/ProductRow";
 
 const ProductsScreen = () => {
-  const {
-    params: { data },
-  } = useRoute();
+  const [data, setData] = useState({});
+
+  const route = useRoute();
+
+  useEffect(() => {
+    if (!route.params) {
+      console.log("No data in the params");
+    } else {
+      if (route.params.data) {
+        setData(route.params?.data);
+      }
+    }
+  });
 
   const navigation = useNavigation();
 

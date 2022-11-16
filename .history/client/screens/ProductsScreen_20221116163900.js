@@ -1,4 +1,5 @@
 import {
+  Dimensions,
   Image,
   Platform,
   SafeAreaView,
@@ -10,7 +11,7 @@ import {
   View,
 } from "react-native";
 import React, { useEffect, useState } from "react";
-import { useNavigation, useRoute } from "@react-navigation/native";
+import { useNavigation, useRoute as route } from "@react-navigation/native";
 import { urlFor } from "../sanity";
 import ProductsHeader from "../components/Header/ProductsHeader";
 import {
@@ -19,10 +20,10 @@ import {
 } from "react-native-heroicons/solid";
 import ProductRow from "../components/ProductRow";
 
+const { width, height } = Dimensions.get("window");
+
 const ProductsScreen = () => {
-  const {
-    params: { data },
-  } = useRoute();
+  const { id, imgUrl, title, description, rows } = route.params;
 
   const navigation = useNavigation();
 
@@ -30,25 +31,25 @@ const ProductsScreen = () => {
     <SafeAreaView style={styles.container}>
       <ProductsHeader />
       <ScrollView>
-        <View className="relative" key={data.id}>
+        <View className="relative" key={id}>
           <Image
             className="w-full h-56 bg-gray-100 p-4"
-            source={{ uri: urlFor(data.imgUrl).url() }}
+            source={{ uri: urlFor(imgUrl).url() }}
           />
         </View>
         <View className="bg-white">
           <View className="px-4 py4">
-            <Text className="text-3xl font-bold">{data.title}</Text>
-            <Text className="text-gray-500 mt-2 mb-4">{data.description}</Text>
+            <Text className="text-3xl font-bold">{title}</Text>
+            <Text className="text-gray-500 mt-2 mb-4">{description}</Text>
             <TouchableOpacity
               activeOpacity={1}
               onPress={() =>
                 navigation.navigate("collection", {
-                  id: data.id,
-                  imgUrl: data.imgUrl,
-                  title: data.title,
-                  description: data.description,
-                  rows: data.rows,
+                  id,
+                  imgUrl,
+                  title,
+                  description,
+                  rows,
                 })
               }
               className="flex-row items-center space-x-2 p-4 border-y border-yellow-300"
@@ -63,7 +64,7 @@ const ProductsScreen = () => {
         </View>
         <View>
           <Text className="px-4 py-6 font-bold text-xl">Products</Text>
-          {data.rows?.map((row) => (
+          {rows?.map((row) => (
             <ProductRow
               key={row._id}
               id={row._id}

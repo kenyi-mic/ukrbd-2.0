@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import MobileHeader from "../components/Header/MobileHeader";
 import Carousel from "../components/Carousel/HomeCarousel";
 import Categories from "../components/Categories";
+import CardTest from "../components/CardTest";
 import FeaturedRow from "../components/FeaturedRow";
 import sanityClient from "../sanity";
 

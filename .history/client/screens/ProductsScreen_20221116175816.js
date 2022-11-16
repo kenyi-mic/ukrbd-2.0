@@ -1,4 +1,5 @@
 import {
+  Dimensions,
   Image,
   Platform,
   SafeAreaView,

@@ -64,7 +64,7 @@ const ProductDetails = () => {
           </Text>
         </TouchableOpacity>
       </View>
-      <ScrollView className="my-3">
+      <ScrollView className="my-2">
         <View className="items-center">
           {/* product carousel */}
           <ProductCarousel id={id} name={name} imgContent={images} />

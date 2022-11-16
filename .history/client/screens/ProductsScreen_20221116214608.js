@@ -20,6 +20,10 @@ import {
 import ProductRow from "../components/ProductRow";
 
 const ProductsScreen = () => {
+  const [data, setData] = useState();
+
+  const route = useRoute()
+  
   const {
     params: { data },
   } = useRoute();
