@@ -20,47 +20,35 @@ import {
 import ProductRow from "../components/ProductRow";
 
 const ProductsScreen = () => {
-  const route = useRoute();
-  const [item, setData] = useState({});
-
-  useEffect(() => {
-    if (!route.params) {
-      Console.log("No data in this log...");
-    } else {
-      if (route?.params?.data) {
-        setData(route?.params?.data);
-      }
-    }
-  });
-  console.log(item?.imgUrl);
   const {
     params: { data },
   } = useRoute();
+
   const navigation = useNavigation();
 
   return (
     <SafeAreaView style={styles.container}>
       <ProductsHeader />
       <ScrollView>
-        <View className="relative" key={data?.id}>
+        <View className="relative" key={data.id}>
           <Image
             className="w-full h-56 bg-gray-100 p-4"
-            source={{ uri: urlFor(data?.imgUrl).url() }}
+            source={{ uri: urlFor(data.imgUrl).url() }}
           />
         </View>
         <View className="bg-white">
           <View className="px-4 py4">
-            <Text className="text-3xl font-bold">{data?.title}</Text>
-            <Text className="text-gray-500 mt-2 mb-4">{data?.description}</Text>
+            <Text className="text-3xl font-bold">{data.title}</Text>
+            <Text className="text-gray-500 mt-2 mb-4">{data.description}</Text>
             <TouchableOpacity
               activeOpacity={1}
               onPress={() =>
                 navigation.navigate("collection", {
-                  id: item?.id,
-                  imgUrl: item?.imgUrl,
-                  title: item?.title,
-                  description: item?.description,
-                  rows: item?.rows,
+                  id: data.id,
+                  imgUrl: data.imgUrl,
+                  title: data.title,
+                  description: data.description,
+                  rows: data.rows,
                 })
               }
               className="flex-row items-center space-x-2 p-4 border-y border-yellow-300"

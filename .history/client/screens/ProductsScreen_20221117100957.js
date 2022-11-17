@@ -18,21 +18,22 @@ import {
   QuestionMarkCircleIcon,
 } from "react-native-heroicons/solid";
 import ProductRow from "../components/ProductRow";
+import { ConsoleLogger } from "@aws-amplify/core";
 
 const ProductsScreen = () => {
   const route = useRoute();
-  const [item, setData] = useState({});
+  const [item, setData] = useState();
 
   useEffect(() => {
     if (!route.params) {
-      Console.log("No data in this log...");
+      ConsoleLogger.log("No data in this log...");
     } else {
       if (route?.params?.data) {
         setData(route?.params?.data);
       }
     }
   });
-  console.log(item?.imgUrl);
+  console.log(item.imgUrl);
   const {
     params: { data },
   } = useRoute();
@@ -56,11 +57,11 @@ const ProductsScreen = () => {
               activeOpacity={1}
               onPress={() =>
                 navigation.navigate("collection", {
-                  id: item?.id,
-                  imgUrl: item?.imgUrl,
-                  title: item?.title,
-                  description: item?.description,
-                  rows: item?.rows,
+                  id: data.id,
+                  imgUrl: data.imgUrl,
+                  title: data.title,
+                  description: data.description,
+                  rows: data.rows,
                 })
               }
               className="flex-row items-center space-x-2 p-4 border-y border-yellow-300"

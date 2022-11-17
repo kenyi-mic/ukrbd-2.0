@@ -42,16 +42,16 @@ const ProductsScreen = () => {
     <SafeAreaView style={styles.container}>
       <ProductsHeader />
       <ScrollView>
-        <View className="relative" key={data?.id}>
+        <View className="relative" key={item?.id}>
           <Image
             className="w-full h-56 bg-gray-100 p-4"
-            source={{ uri: urlFor(data?.imgUrl).url() }}
+            source={{ uri: urlFor(item?.imgUrl).url() }}
           />
         </View>
         <View className="bg-white">
           <View className="px-4 py4">
-            <Text className="text-3xl font-bold">{data?.title}</Text>
-            <Text className="text-gray-500 mt-2 mb-4">{data?.description}</Text>
+            <Text className="text-3xl font-bold">{item?.title}</Text>
+            <Text className="text-gray-500 mt-2 mb-4">{item?.description}</Text>
             <TouchableOpacity
               activeOpacity={1}
               onPress={() =>
@@ -75,7 +75,7 @@ const ProductsScreen = () => {
         </View>
         <View>
           <Text className="px-4 py-6 font-bold text-xl">Products</Text>
-          {data.rows?.map((row) => (
+          {item.rows?.map((row) => (
             <ProductRow
               key={row._id}
               id={row._id}
