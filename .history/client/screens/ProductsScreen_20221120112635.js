@@ -32,7 +32,6 @@ const ProductsScreen = () => {
       }
     }
   }, []);
-
   console.log(imgUrl);
   const {
     params: { id, imgUrl, title, description, rows },

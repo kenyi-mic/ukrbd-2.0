@@ -31,8 +31,7 @@ const ProductsScreen = () => {
         setData(route?.params?.data);
       }
     }
-  }, []);
-
+  });
   console.log(imgUrl);
   const {
     params: { id, imgUrl, title, description, rows },
