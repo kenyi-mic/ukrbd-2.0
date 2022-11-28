@@ -30,6 +30,7 @@ const ItemCard = ({ id, name, image, images, description, price, rating }) => {
     dispatch(addToBasket({ id, name, image, description, price, rating }));
   };
   const items = useSelector((state) => selectBasketItemsWithID(state, id));
+
   const removeItemFromBasket = () => dispatch(removeFromBasket({ id }));
 
   return (

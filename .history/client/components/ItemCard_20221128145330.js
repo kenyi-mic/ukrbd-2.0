@@ -19,6 +19,7 @@ import {
   addToBasket,
   removeFromBasket,
   selectBasketItemsWithID,
+  selectTotalQuantity,
 } from "../features/basketSlice";
 import Currency from "react-currency-formatter";
 

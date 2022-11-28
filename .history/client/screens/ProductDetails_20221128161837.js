@@ -108,8 +108,8 @@ const ProductDetails = () => {
             </Pressable>
             {product.map((item) => (
               <View key={item.id}>
-                {product.length >= 1 ? (
-                  <Text className="text-xl font-bold">{item.cartQuantity}</Text>
+                {item.cartQuantity >= 0 ? (
+                  <Text className="text-xl font-bold"></Text>
                 ) : (
                   <Text className="text-xl font-bold">{product.length}</Text>
                 )}

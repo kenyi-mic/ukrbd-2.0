@@ -49,13 +49,6 @@ export const selectBasketItemsWithID = (state, id) =>
 
 //Subtotal handler
 export const selectTotal = (state) =>
-  state.basket.items.reduce((total, item) => total + item.price, 0);
-
-//Subtotal price handler
-export const selectTotalQuantity = (state) =>
-  state.basket.items.reduce(
-    (totalQuantity, item) => totalQuantity + item.cartQuantity,
-    0
-  );
+  state.basket.items.reduce((total, item) => item.cartQuantity + item.price, 0);
 
 export default basketSlice.reducer;

@@ -106,15 +106,7 @@ const ProductDetails = () => {
             <Pressable onPress={removeItemFromBasket}>
               <MinusCircleIcon color="#FF9900" size={40} />
             </Pressable>
-            {product.map((item) => (
-              <View key={item.id}>
-                {product.length >= 1 ? (
-                  <Text className="text-xl font-bold">{item.cartQuantity}</Text>
-                ) : (
-                  <Text className="text-xl font-bold">{product.length}</Text>
-                )}
-              </View>
-            ))}
+            <Text className="text-xl font-bold">{totalQuantity}</Text>
             <Pressable onPress={addItemToBasket}>
               <PlusCircleIcon color="#FF9900" size={40} />
             </Pressable>

@@ -15,8 +15,8 @@ import ItemCard from "../components/ItemCard";
 import { useSelector } from "react-redux";
 import {
   selectBasketItems,
+  selectBasketItemsWithID,
   selectTotal,
-  selectTotalQuantity,
 } from "../features/basketSlice";
 import Currency from "react-currency-formatter";
 import { withAuthenticator } from "aws-amplify-react-native";
@@ -24,7 +24,8 @@ import { withAuthenticator } from "aws-amplify-react-native";
 const CartScreen = (id) => {
   const items = useSelector(selectBasketItems);
   const total = useSelector(selectTotal);
-  const totalQuantity = useSelector(selectTotalQuantity);
+
+  console.log(items);
 
   return (
     <SafeAreaView style={styles.Container}>
@@ -50,12 +51,13 @@ const CartScreen = (id) => {
         {/* Total screen*/}
         {items.length !== 0 && (
           <View className="px-3 py-6">
+            {items.map((item)=>(
             <View className="flex-row space-x-2  ">
               <Text className="text-lg font-semibold text-gray-700">
-                Subtotal ({totalQuantity} items):
+                Subtotal ({items.length} items):
               </Text>
               <Text className="text-lg font-semibold italic text-green-500">
-                <Currency quantity={total + totalQuantity} currency="BDT" />
+                <Currency quantity={total} currency="BDT" />
               </Text>
             </View>
             <TouchableOpacity
@@ -63,9 +65,11 @@ const CartScreen = (id) => {
               className="bg-amber-400 lg:w-32 sm:w-11/12  items-center p-2 my-4 rounded"
             >
               <Text className="text-lg font-bold text-gray-600">
-                Check out{`(${totalQuantity}) `}
+                Check out{`(${items.length}) `}
               </Text>
             </TouchableOpacity>
+              
+            ))}
           </View>
         )}
       </ScrollView>

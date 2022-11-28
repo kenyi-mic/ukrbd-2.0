@@ -55,7 +55,7 @@ const CartScreen = (id) => {
                 Subtotal ({totalQuantity} items):
               </Text>
               <Text className="text-lg font-semibold italic text-green-500">
-                <Currency quantity={total + totalQuantity} currency="BDT" />
+                <Currency quantity={(total, totalQuantity)} currency="BDT" />
               </Text>
             </View>
             <TouchableOpacity

@@ -28,7 +28,7 @@ export const basketSlice = createSlice({
 
       if (index >= 2) {
         newBasket[index].cartQuantity -= 1;
-      } else if (state.cartQuantity <= 1) {
+      } else if (index <= 2) {
         newBasket.splice(index, 1);
       } else {
         console.warn(
@@ -47,15 +47,7 @@ export const selectBasketItems = (state) => state.basket.items;
 export const selectBasketItemsWithID = (state, id) =>
   state.basket.items.filter((item) => item.id === id);
 
-//Subtotal handler
 export const selectTotal = (state) =>
   state.basket.items.reduce((total, item) => total + item.price, 0);
-
-//Subtotal price handler
-export const selectTotalQuantity = (state) =>
-  state.basket.items.reduce(
-    (totalQuantity, item) => totalQuantity + item.cartQuantity,
-    0
-  );
 
 export default basketSlice.reducer;

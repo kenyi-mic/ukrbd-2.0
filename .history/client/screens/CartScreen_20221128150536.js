@@ -25,7 +25,11 @@ const CartScreen = (id) => {
   const items = useSelector(selectBasketItems);
   const total = useSelector(selectTotal);
   const totalQuantity = useSelector(selectTotalQuantity);
-
+  const totalPack = () => {
+    for (let i = 0; i < totalQuantity; i++) {
+      total += 1;
+    }
+  };
   return (
     <SafeAreaView style={styles.Container}>
       <MobileHeader />
@@ -55,7 +59,7 @@ const CartScreen = (id) => {
                 Subtotal ({totalQuantity} items):
               </Text>
               <Text className="text-lg font-semibold italic text-green-500">
-                <Currency quantity={total + totalQuantity} currency="BDT" />
+                <Currency quantity={(total, totalQuantity)} currency="BDT" />
               </Text>
             </View>
             <TouchableOpacity

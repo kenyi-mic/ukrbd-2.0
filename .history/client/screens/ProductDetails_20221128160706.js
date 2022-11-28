@@ -23,7 +23,6 @@ import {
   removeFromBasket,
   selectBasketItems,
   selectBasketItemsWithID,
-  selectTotalQuantity,
 } from "../features/basketSlice";
 import ProductCarousel from "../components/Carousel/ProductCarousel";
 
@@ -41,7 +40,7 @@ const ProductDetails = () => {
   const addItemToBasket = () => {
     dispatch(addToBasket({ id, name, image, description, price, rating }));
   };
-  const totalQuantity = useSelector(selectTotalQuantity);
+  console.log(product);
 
   const removeItemFromBasket = () => dispatch(removeFromBasket({ id }));
   return (
@@ -106,15 +105,7 @@ const ProductDetails = () => {
             <Pressable onPress={removeItemFromBasket}>
               <MinusCircleIcon color="#FF9900" size={40} />
             </Pressable>
-            {product.map((item) => (
-              <View key={item.id}>
-                {product.length >= 1 ? (
-                  <Text className="text-xl font-bold">{item.cartQuantity}</Text>
-                ) : (
-                  <Text className="text-xl font-bold">{product.length}</Text>
-                )}
-              </View>
-            ))}
+            <Text className="text-xl font-bold">{product.length}</Text>
             <Pressable onPress={addItemToBasket}>
               <PlusCircleIcon color="#FF9900" size={40} />
             </Pressable>

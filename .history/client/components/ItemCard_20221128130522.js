@@ -21,15 +21,22 @@ import {
   selectBasketItemsWithID,
 } from "../features/basketSlice";
 import Currency from "react-currency-formatter";
+import { useState } from "react";
 
 const { width, height } = Dimensions.get("screen");
 
 const ItemCard = ({ id, name, image, images, description, price, rating }) => {
+  const [quantity, setQantity] = useState()
   const dispatch = useDispatch();
   const addItemToBasket = () => {
     dispatch(addToBasket({ id, name, image, description, price, rating }));
   };
   const items = useSelector((state) => selectBasketItemsWithID(state, id));
+//implementing cart quantity
+  items.map((item)=>{
+    setQantity(item.cartQuantity)
+  })
+
   const removeItemFromBasket = () => dispatch(removeFromBasket({ id }));
 
   return (
@@ -100,13 +107,17 @@ const ItemCard = ({ id, name, image, images, description, price, rating }) => {
               >
                 <Text className="text-lg font-bold text-gray-100">Buy</Text>
               </TouchableOpacity>
-              <TouchableOpacity
-                onPress={removeItemFromBasket}
-                activeOpacity={0.7}
-                className="bg-amber-500 p-1 my-2 w-20 items-center rounded"
-              >
-                <Text className="text-lg font-bold text-gray-100">Remove</Text>
-              </TouchableOpacity>
+              {items.map((item) => (
+                <TouchableOpacity
+                  onPress={}
+                  activeOpacity={0.7}
+                  className="bg-amber-500 p-1 my-2 w-20 items-center rounded"
+                >
+                  <Text className="text-lg font-bold text-gray-100">
+                    Remove
+                  </Text>
+                </TouchableOpacity>
+              ))}
             </View>
           </View>
         </View>

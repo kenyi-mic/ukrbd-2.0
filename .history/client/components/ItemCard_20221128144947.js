@@ -19,6 +19,7 @@ import {
   addToBasket,
   removeFromBasket,
   selectBasketItemsWithID,
+  selectTotalPrice,
 } from "../features/basketSlice";
 import Currency from "react-currency-formatter";
 
@@ -31,6 +32,9 @@ const ItemCard = ({ id, name, image, images, description, price, rating }) => {
   };
   const items = useSelector((state) => selectBasketItemsWithID(state, id));
   const removeItemFromBasket = () => dispatch(removeFromBasket({ id }));
+  const total = useSelector(selectTotalPrice);
+
+  console.log(total);
 
   return (
     <>

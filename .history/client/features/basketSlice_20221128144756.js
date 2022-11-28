@@ -52,9 +52,9 @@ export const selectTotal = (state) =>
   state.basket.items.reduce((total, item) => total + item.price, 0);
 
 //Subtotal price handler
-export const selectTotalQuantity = (state) =>
+export const selectTotalPrice = (state) =>
   state.basket.items.reduce(
-    (totalQuantity, item) => totalQuantity + item.cartQuantity,
+    (totalPrice, item) => totalPrice + item.cartQuantity,
     0
   );
 

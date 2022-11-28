@@ -30,6 +30,7 @@ const ItemCard = ({ id, name, image, images, description, price, rating }) => {
     dispatch(addToBasket({ id, name, image, description, price, rating }));
   };
   const items = useSelector((state) => selectBasketItemsWithID(state, id));
+
   const removeItemFromBasket = () => dispatch(removeFromBasket({ id }));
 
   return (
@@ -100,13 +101,17 @@ const ItemCard = ({ id, name, image, images, description, price, rating }) => {
               >
                 <Text className="text-lg font-bold text-gray-100">Buy</Text>
               </TouchableOpacity>
-              <TouchableOpacity
-                onPress={removeItemFromBasket}
-                activeOpacity={0.7}
-                className="bg-amber-500 p-1 my-2 w-20 items-center rounded"
-              >
-                <Text className="text-lg font-bold text-gray-100">Remove</Text>
-              </TouchableOpacity>
+              {items.map((item) => (
+                <TouchableOpacity
+                  onPress={item.cartQuantity - 1}
+                  activeOpacity={0.7}
+                  className="bg-amber-500 p-1 my-2 w-20 items-center rounded"
+                >
+                  <Text className="text-lg font-bold text-gray-100">
+                    Remove
+                  </Text>
+                </TouchableOpacity>
+              ))}
             </View>
           </View>
         </View>

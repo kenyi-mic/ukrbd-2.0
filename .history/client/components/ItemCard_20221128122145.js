@@ -30,6 +30,9 @@ const ItemCard = ({ id, name, image, images, description, price, rating }) => {
     dispatch(addToBasket({ id, name, image, description, price, rating }));
   };
   const items = useSelector((state) => selectBasketItemsWithID(state, id));
+
+  console.log(items);
+
   const removeItemFromBasket = () => dispatch(removeFromBasket({ id }));
 
   return (
@@ -67,14 +70,9 @@ const ItemCard = ({ id, name, image, images, description, price, rating }) => {
                 <TouchableOpacity onPress={removeItemFromBasket}>
                   <MinusCircleIcon color="#FF9900" size={30} />
                 </TouchableOpacity>
-                {items.map((item) => {
-                  return (
-                    <Text className="text-lg font-bold">
-                      {item.cartQuantity}
-                    </Text>
-                  );
-                })}
-
+                {items.length > 0 && (
+                  <Text className="text-lg font-bold">{items.length}</Text>
+                )}
                 <TouchableOpacity onPress={addItemToBasket}>
                   <PlusCircleIcon color="#FF9900" size={30} />
                 </TouchableOpacity>
@@ -83,14 +81,9 @@ const ItemCard = ({ id, name, image, images, description, price, rating }) => {
                 <XMarkIcon color="black" size={30} />
               </TouchableOpacity>
             </View>
-            {items.map((item) => (
-              <Text
-                key={item.id}
-                className="text-green-600 text-lg font-light italic"
-              >
-                <Currency quantity={price * item.cartQuantity} currency="BDT" />
-              </Text>
-            ))}
+            <Text className="text-green-600 text-lg font-light italic">
+              <Currency quantity={price * items.length} currency="BDT" />
+            </Text>
             {/*Buy and remove button*/}
             <View className="flex flex-row  space-x-6">
               <TouchableOpacity
