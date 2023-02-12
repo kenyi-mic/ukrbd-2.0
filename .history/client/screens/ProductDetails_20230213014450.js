@@ -5,7 +5,7 @@ import {
   StyleSheet,
   ScrollView,
   Pressable,
-  
+  TouchableOpacity,
 } from "react-native";
 import React from "react";
 import { useNavigation, useRoute } from "@react-navigation/native";
@@ -48,15 +48,15 @@ const ProductDetails = () => {
     <View key={id} style={styles.container}>
       <View className="flex flex-row justify-between  pb-4 mb-2 w-full">
         {/*back bottom*/}
-        <Pressable 
+        <TouchableOpacity style={styles.touchableOpacity}
           onPress={() => navigation.goBack()}
           className=" top-8 left-2 my-2"
         >
           <ArrowLeftCircleIcon color="#FF9900" size={40} />
-        </Pressable>
+        </TouchableOpacity>
 
         {/*basket*/}
-        <Pressable 
+        <TouchableOpacity style={styles.touchableOpacity}
           onPress={() => navigation.navigate("My Cart")}
           className="top-8 right-2 my-2 "
         >
@@ -64,7 +64,7 @@ const ProductDetails = () => {
           <Text className="absolute right-0  text-sm text-gray-600 font-bold bg-green-500 w-5 h-5  rounded-full text-center ">
             {items.length}
           </Text>
-        </Pressable>
+        </TouchableOpacity>
       </View>
       <ScrollView className="my-3">
         <View className="items-center">
@@ -120,16 +120,16 @@ const ProductDetails = () => {
             </Pressable>
           </View>
           <View className="flex flex-row justify-between w-11/12 mb-10">
-            <Pressable  onPress={addItemToBasket}>
+            <TouchableOpacity style={styles.touchableOpacity} onPress={addItemToBasket}>
               <Text className="bg-yellow-300 text-lg font-bold text-green-600 p-2 my-3 rounded-sm">
                 Add to Cart
               </Text>
-            </Pressable>
-            <Pressable  onPress={() => alert("Sign in!")}>
+            </TouchableOpacity>
+            <TouchableOpacity  style={styles.touchableOpacity} onPress={() => alert("Sign in!")}>
               <Text className="bg-yellow-500 text-lg font-bold text-gray-600 p-2 my-3 w-28 text-center rounded-sm ">
                 Buy
               </Text>
-            </Pressable>
+            </TouchableOpacity>
           </View>
         </View>
       </ScrollView>
@@ -138,7 +138,9 @@ const ProductDetails = () => {
 };
 
 const styles = StyleSheet.create({
-  
+  touchableOpacity: {
+    touchAction: "none",
+  },
   container: {
     flex: 1,
   },

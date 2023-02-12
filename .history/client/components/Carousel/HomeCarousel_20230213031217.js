@@ -9,6 +9,7 @@ import {
   Dimensions,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+
 import { urlFor } from "../../sanity";
 
 const { width, height } = Dimensions.get("window");
@@ -86,8 +87,6 @@ const styles = StyleSheet.create({
   },
   itemText: {
     fontSize: 26,
-    width:width - 20,
-    textAlign:"center",
     position: "absolute",
     textShadowOffset: { width: 1, height: 1 },
     textShadowRadius: 1,

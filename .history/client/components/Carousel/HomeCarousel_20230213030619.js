@@ -8,13 +8,14 @@ import {
   ScrollView,
   Dimensions,
 } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation } from "react-router";
 import { urlFor } from "../../sanity";
 
 const { width, height } = Dimensions.get("window");
 
 const HomeCarousel = ({ data }) => {
   const [selectedIndex, setSelectedIndex] = useState(0);
+ 
   useEffect(() => {
     const intervalId = setInterval(() => {
       setSelectedIndex((selectedIndex + 1) % data.length);
@@ -86,8 +87,6 @@ const styles = StyleSheet.create({
   },
   itemText: {
     fontSize: 26,
-    width:width - 20,
-    textAlign:"center",
     position: "absolute",
     textShadowOffset: { width: 1, height: 1 },
     textShadowRadius: 1,

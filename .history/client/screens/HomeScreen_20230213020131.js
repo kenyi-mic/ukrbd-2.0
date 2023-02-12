@@ -14,29 +14,6 @@ import sanityClient from "../sanity";
 
 const HomeScreen = () => {
   const [featuredCategory, setFeaturedCategory] = useState([]);
-  const [categoryData, setCategoryData] = useState([]);
-
-  useEffect(() => {
-    sanityClient
-      .fetch(
-        `*[_type=="category"]{
-    ...,
-    products[]->{
-      ...,
-      rows[]->{
-        ...,
-        products[]->{
-          ...,
-        }
-      }
-    }
-    
-  }`
-      )
-      .then((data) => {
-        setCategoryData(data);
-      });
-  }, []);
 
   useEffect(() => {
     sanityClient
@@ -60,7 +37,7 @@ const HomeScreen = () => {
     <View style={styles.container}>
       <MobileHeader />
       <ScrollView style={styles.ScrollView}>
-        <Carousel data={categoryData} />
+        <Carousel data={featuredCategory} />
         {/*Categories */}
         <Categories />
         {/*Test component*/}

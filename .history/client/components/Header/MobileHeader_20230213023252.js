@@ -50,8 +50,7 @@ const MobileHeader = () => {
 const styles = StyleSheet.create({
   container: {
     marginTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
-    
-    
+    position:'absolute'
   },
 });
 export default MobileHeader;
