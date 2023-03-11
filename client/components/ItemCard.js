@@ -98,14 +98,14 @@ const ItemCard = ({ id, name, image, images, description, price, rating }) => {
                 activeOpacity={0.7}
                 className="bg-amber-500 p-1 my-2 w-20 items-center rounded"
               >
-                <Text className="text-lg font-bold text-gray-100">Buy</Text>
+                <Text className="text-sm font-bold text-gray-100">Buy</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={removeItemFromBasket}
                 activeOpacity={0.7}
                 className="bg-amber-500 p-1 my-2 w-20 items-center rounded"
               >
-                <Text className="text-lg font-bold text-gray-100">Remove</Text>
+                <Text className="text-sm font-bold text-gray-100">Remove</Text>
               </TouchableOpacity>
             </View>
           </View>

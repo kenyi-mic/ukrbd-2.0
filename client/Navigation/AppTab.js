@@ -13,9 +13,7 @@ import {
   UserIcon,
 } from "react-native-heroicons/solid";
 import { useSelector } from "react-redux";
-import { selectBasketItems } from "../features/basketSlice";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-
 import ProductsScreen from "../screens/ProductsScreen";
 import CategoryScreen from "../screens/CategoryScreen";
 import EditProfileScreen from "../screens/EditProfileScreen";
@@ -145,7 +143,8 @@ const styles = StyleSheet.create({
     width: 15,
     height: 15,
     position: "absolute",
-    borderRadius: 100,
+    borderRadius: 50,
+    
     top: 0,
     right: 32,
   },

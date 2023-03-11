@@ -55,7 +55,7 @@ const Product = ({ id, name, image, images, description, price, rating }) => {
         <View>
           <TouchableOpacity
             onPress={addItemToBasket}
-            className="bg-yellow-300 w-24 mx-2 mb-2 rounded"
+            className="bg-yellow-300 w-38  mx-2 mb-2 rounded"
           >
             <Text className="text-sm text-gray-600 mx-2 py-2">Add to cart</Text>
           </TouchableOpacity>

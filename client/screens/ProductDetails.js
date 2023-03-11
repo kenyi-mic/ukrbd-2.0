@@ -61,7 +61,7 @@ const ProductDetails = () => {
           className="top-8 right-2 my-2 "
         >
           <ShoppingCartIcon color="#FF9900" size={40} />
-          <Text className="absolute right-0  text-sm text-gray-600 font-bold bg-green-500 w-5 h-5  rounded-full text-center ">
+          <Text className="absolute right-0  text-xs text-gray-200 font-bold flex justify-items-center  bg-green-500 w-5 h-5  rounded-full text-center" style={{borderRadius:9, overflow:'hidden'}}>
             {items.length}
           </Text>
         </Pressable>

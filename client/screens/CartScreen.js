@@ -63,7 +63,7 @@ const CartScreen = (id) => {
               activeOpacity={0.7}
               className="bg-amber-400 lg:w-32 sm:w-11/12  items-center p-2 my-4 rounded"
             >
-              <Text className="text-lg font-bold text-gray-600">
+              <Text className="text-lg font-bold text-white">
                 Check out{`(${totalQuantity}) `}
               </Text>
             </TouchableOpacity>
@@ -77,6 +77,8 @@ const CartScreen = (id) => {
 const styles = StyleSheet.create({
   touchableOpacity: {
     touchAction: "none",
+    elevation:5,
+    shadowColor: "#000",
   },
   Container: {
     marginTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,

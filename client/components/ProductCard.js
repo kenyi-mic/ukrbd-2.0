@@ -1,7 +1,7 @@
 import { Image, Text, TouchableOpacity, View } from "react-native";
 import React from "react";
 import { urlFor } from "../sanity";
-import { useNavigation } from "@react-navigation/native";
+
 
 const ProductCard = ({ id, imgUrl, title, description, onPress }) => {
   return (
@@ -10,7 +10,7 @@ const ProductCard = ({ id, imgUrl, title, description, onPress }) => {
       className="bg-white mr-3 shadow w-44 h-auto"
     >
       <Image className="w-full h-40 " source={{ uri: urlFor(imgUrl)?.url() }} />
-      <View>
+      <View >
         <Text numberOfLines={1} className="font-semibold text-base pt-2 mx-2">
           {title}
         </Text>
