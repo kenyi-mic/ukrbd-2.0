@@ -68,7 +68,7 @@ const HomeScreen = () => {
         {/* Featured*/}
         {featuredCategory?.map((items) => (
           <FeaturedRow
-            key={items.id}
+            key={items._id}
             id={items._id}
             title={items.name}
             description={items.short_description}

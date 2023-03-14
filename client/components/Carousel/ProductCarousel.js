@@ -1,16 +1,9 @@
-import {
-  View,
-  Text,
-  FlatList,
-  Image,
-  Dimensions,
-  ScrollView,
-} from "react-native";
-import React, { useEffect, useState } from "react";
-import sanityClient, { urlFor } from "../../sanity";
-import { StyleSheet } from "react-native";
-
-const { width, height } = Dimensions.get("window");
+import { View, Animated } from "react-native";
+import React, { useState, useRef, useEffect } from "react";
+import sanityClient from "../../sanity";
+import { FlatList } from "react-native";
+import ProductSlide from "../ProductSlide";
+import ProductPagination from "../ProductPagination";
 
 const ProductCarousel = ({ id }) => {
   const [images, setImages] = useState([]);
@@ -33,63 +26,49 @@ const ProductCarousel = ({ id }) => {
       });
   }, [id]);
 
-  const [imgActive, setImagActive] = useState(0);
-
-  const onChange = (nativeEvent) => {
-    if (nativeEvent) {
-      const slide = Math.ceil(
-        nativeEvent.contentOffset.x / nativeEvent.layoutMeasurement.width
-      );
-
-      if (slide != imgActive) {
-        setImagActive(slide);
+  const [index, setIndex] = useState(0);
+  const scrollX = useRef(new Animated.Value(0)).current;
+  const handleOnScroll = (event) => {
+    Animated.event(
+      [
+        {
+          nativeEvent: {
+            contentOffset: {
+              x: scrollX,
+            },
+          },
+        },
+      ],
+      {
+        useNativeDriver: false,
       }
-    }
+    )(event);
   };
 
-  return (
-    <View style={styles.image}>
-      <ScrollView
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        pagingEnabled
-        onScroll={({ nativeEvent }) => onChange(nativeEvent)}
-      >
-        {images?.map((item, index) => (
-          <View key={index} style={styles.image}>
-            <Image
-              resizeMode="contain"
-              className="w-full h-full mt-3"
-              source={{ uri: urlFor(item?.image).url() }}
-            />
-          </View>
-        ))}
-      </ScrollView>
+  const handleOnViewableItemsChanged = useRef(({ viewableItems }) => {
+    setIndex(viewableItems[0].index);
+  }).current;
 
-      {/*Dots*/}
-      <View className="absolute bottom-0 right-40 flex-row items-center">
-        {images.map((item, index) => (
-          <Text
-            key={item.length}
-            className={`${
-              imgActive == index
-                ? "m-3 text-black "
-                : "m-3 text-white drop-shadow-lg"
-            }`}
-          >
-            &#x25cf;
-          </Text>
-        ))}
-      </View>
+  const viewabilityConfig = useRef({
+    itemVisiblePercentThreshold: 0.2,
+  }).current;
+
+  return (
+    <View>
+      <FlatList
+        data={images}
+        renderItem={({ item }) => <ProductSlide item={item} />}
+        horizontal
+        pagingEnabled
+        snapToAlignment="center"
+        showsHorizontalScrollIndicator={false}
+        onScroll={handleOnScroll}
+        onViewableItemsChanged={handleOnViewableItemsChanged}
+        viewabilityConfig={viewabilityConfig}
+      />
+      <ProductPagination data={images} scrollX={scrollX} index={index} />
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  image: {
-    width: width - 10,
-    height: height / 1.5,
-  },
-});
 
 export default ProductCarousel;

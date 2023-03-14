@@ -5,9 +5,8 @@ import {
   StyleSheet,
   ScrollView,
   Pressable,
-  
 } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import Currency from "react-currency-formatter";
 import {
@@ -23,9 +22,9 @@ import {
   removeFromBasket,
   selectBasketItems,
   selectBasketItemsWithID,
-  selectTotalQuantity,
 } from "../features/basketSlice";
 import ProductCarousel from "../components/Carousel/ProductCarousel";
+import { TouchableOpacity } from "react-native";
 
 const { width, height } = Dimensions.get("screen");
 const ProductDetails = () => {
@@ -41,14 +40,14 @@ const ProductDetails = () => {
   const addItemToBasket = () => {
     dispatch(addToBasket({ id, name, image, description, price, rating }));
   };
-  const totalQuantity = useSelector(selectTotalQuantity);
 
   const removeItemFromBasket = () => dispatch(removeFromBasket({ id }));
+
   return (
     <View key={id} style={styles.container}>
       <View className="flex flex-row justify-between  pb-4 mb-2 w-full">
         {/*back bottom*/}
-        <Pressable 
+        <Pressable
           onPress={() => navigation.goBack()}
           className=" top-8 left-2 my-2"
         >
@@ -56,18 +55,21 @@ const ProductDetails = () => {
         </Pressable>
 
         {/*basket*/}
-        <Pressable 
+        <Pressable
           onPress={() => navigation.navigate("My Cart")}
           className="top-8 right-2 my-2 "
         >
           <ShoppingCartIcon color="#FF9900" size={40} />
-          <Text className="absolute right-0  text-xs text-gray-200 font-bold flex justify-items-center  bg-green-500 w-5 h-5  rounded-full text-center" style={{borderRadius:9, overflow:'hidden'}}>
+          <Text
+            className="absolute right-0  text-xs text-gray-200 font-bold flex justify-items-center  bg-green-500 w-5 h-5  rounded-full text-center"
+            style={{ borderRadius: 9, overflow: "hidden" }}
+          >
             {items.length}
           </Text>
         </Pressable>
       </View>
       <ScrollView className="my-3">
-        <View className="items-center">
+        <View style={styles.carousel} className="items-center">
           {/* product carousel */}
           <ProductCarousel id={id} name={name} imgContent={images} />
         </View>
@@ -102,30 +104,22 @@ const ProductDetails = () => {
           </Text>
 
           <Text className="text-lg  font-semibold mb-1">Quantity</Text>
-          <View className="flex-row items-center space-x-2 pb-3">
-            <Pressable onPress={removeItemFromBasket}>
-              <MinusCircleIcon color="#FF9900" size={40} />
-            </Pressable>
-            {product.map((item) => (
-              <View key={item.id}>
-                {product.length >= 1 ? (
-                  <Text className="text-xl font-bold">{item.cartQuantity}</Text>
-                ) : (
-                  <Text className="text-xl font-bold">{product.length}</Text>
-                )}
-              </View>
-            ))}
-            <Pressable onPress={addItemToBasket}>
-              <PlusCircleIcon color="#FF9900" size={40} />
-            </Pressable>
+          <View className="flex flex-row items-center space-x-2">
+            <TouchableOpacity onPress={removeItemFromBasket}>
+              <MinusCircleIcon color="#FF9900" size={30} />
+            </TouchableOpacity>
+            <Text>{product.length}</Text>
+            <TouchableOpacity onPress={addItemToBasket}>
+              <PlusCircleIcon color="#FF9900" size={30} />
+            </TouchableOpacity>
           </View>
           <View className="flex flex-row justify-between w-11/12 mb-10">
-            <Pressable  onPress={addItemToBasket}>
+            <Pressable onPress={addItemToBasket}>
               <Text className="bg-yellow-300 text-lg font-bold text-green-600 p-2 my-3 rounded-sm">
                 Add to Cart
               </Text>
             </Pressable>
-            <Pressable  onPress={() => alert("Sign in!")}>
+            <Pressable onPress={() => alert("Sign in!")}>
               <Text className="bg-yellow-500 text-lg font-bold text-gray-600 p-2 my-3 w-28 text-center rounded-sm ">
                 Buy
               </Text>
@@ -138,13 +132,11 @@ const ProductDetails = () => {
 };
 
 const styles = StyleSheet.create({
-  
   container: {
     flex: 1,
   },
-  mainImage: {
-    width: width - 20,
-    height: height / 2,
+  carousel: {
+    flex: 0.5,
   },
 });
 

@@ -7,7 +7,7 @@ const ProfileBotton = ({ onPress, title }) => {
       onPress={onPress}
       className="bg-white p-2 rounded border w-40 items-center"
     >
-      <Text className="text-xl text-gray-800 font-semibold">{title}</Text>
+      <Text className="text-lg text-gray-800 font-semibold">{title}</Text>
     </TouchableOpacity>
   );
 };

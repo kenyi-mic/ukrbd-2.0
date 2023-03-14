@@ -31,7 +31,11 @@ const Product = ({ id, name, image, images, description, price, rating }) => {
       }
       className="bg-white w-40 mx-3 mb-4"
     >
-      <Image className="w-full h-40" source={{ uri: urlFor(image).url() }} />
+      <Image
+        className="w-full h-40 rounded-sm"
+        source={{ uri: urlFor(image).url() }}
+        resizeMode="contain"
+      />
       <Pressable onPress={() => SetIspressed(!isPressed)}>
         <Text numberOfLines={1} className="mx-2 text-semibold text-sm">
           {name}

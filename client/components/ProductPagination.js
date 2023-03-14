@@ -1,8 +1,8 @@
 import { StyleSheet, View, Dimensions, Animated } from "react-native";
 import React from "react";
-const { width } = Dimensions.get("window");
+const { width, height } = Dimensions.get("window");
 
-const Pagination = ({ data, scrollX, index }) => {
+const ProductPagination = ({ data, scrollX, index }) => {
   return (
     <View style={styles.container}>
       {data.map((_, idx) => {
@@ -33,14 +33,14 @@ const Pagination = ({ data, scrollX, index }) => {
   );
 };
 
-export default Pagination;
+export default ProductPagination;
 
 const styles = StyleSheet.create({
   container: {
     position: "absolute",
-    bottom: 15,
     flexDirection: "row",
     width: "100%",
+    bottom: height * 0.05,
     alignItems: "center",
     justifyContent: "center",
   },

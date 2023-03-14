@@ -21,6 +21,8 @@ import {
   selectBasketItemsWithID,
 } from "../features/basketSlice";
 import Currency from "react-currency-formatter";
+import { Pressable } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 const { width, height } = Dimensions.get("screen");
 
@@ -31,20 +33,35 @@ const ItemCard = ({ id, name, image, images, description, price, rating }) => {
   };
   const items = useSelector((state) => selectBasketItemsWithID(state, id));
   const removeItemFromBasket = () => dispatch(removeFromBasket({ id }));
+  const navigation = useNavigation();
 
   return (
     <>
-      <View style={styles.container} id={id} className="items-center py-2  ">
-        <View className="flex flex-row space-x-3">
+      <View style={styles.container} key={id} className="items-center py-2  ">
+        <Pressable
+          onPress={() =>
+            navigation.navigate("Product Details", {
+              id,
+              name,
+              image,
+              images,
+              description,
+              price,
+              rating,
+            })
+          }
+          className="flex flex-row space-x-3"
+        >
           <Image
-            className="w-40 h-48 shadow-sm "
+            className="w-40 h-48 rounded-xs bg-white "
             source={{ uri: urlFor(image).url() }}
+            resizeMode="contain"
           />
 
           <View className="w-2/4">
             <Text
               numberOfLines={2}
-              className="text-xl font-bold text-gray-500 "
+              className="text-sm font-bold text-gray-500 "
             >
               {name}
             </Text>
@@ -60,16 +77,16 @@ const ItemCard = ({ id, name, image, images, description, price, rating }) => {
               <Text className="text-green-600">rating</Text>
             </View>
             <View className="flex flex-row items-center justify-around py-2">
-              <Text className=" text-lg font-semibold italic text-gray-400">
+              <Text className=" text-sm font-semibold italic text-gray-400">
                 QTY:
               </Text>
               <View className="flex flex-row items-center space-x-2">
                 <TouchableOpacity onPress={removeItemFromBasket}>
                   <MinusCircleIcon color="#FF9900" size={30} />
                 </TouchableOpacity>
-                {items.map((item) => {
+                {items.map((item, index) => {
                   return (
-                    <Text className="text-lg font-bold">
+                    <Text key={index} className="text-sm font-bold">
                       {item.cartQuantity}
                     </Text>
                   );
@@ -86,7 +103,7 @@ const ItemCard = ({ id, name, image, images, description, price, rating }) => {
             {items.map((item) => (
               <Text
                 key={item.id}
-                className="text-green-600 text-lg font-light italic"
+                className="text-green-600 text-sm font-light italic"
               >
                 <Currency quantity={price * item.cartQuantity} currency="BDT" />
               </Text>
@@ -109,7 +126,7 @@ const ItemCard = ({ id, name, image, images, description, price, rating }) => {
               </TouchableOpacity>
             </View>
           </View>
-        </View>
+        </Pressable>
       </View>
     </>
   );
