@@ -5,7 +5,6 @@ import {
   StatusBar,
   Platform,
   StyleSheet,
-  TextInput,
   TouchableOpacity,
   ScrollView,
 } from "react-native";
@@ -15,18 +14,43 @@ import ProductsHeader from "../components/Header/ProductsHeader";
 import { formData } from "../components/FormData";
 import FormField from "../components/FormField";
 import { useNavigation } from "@react-navigation/native";
+import { useDispatch } from "react-redux";
+import {
+  setEmail,
+  setLocation,
+  setName,
+  setPhone,
+} from "../features/userSlice";
 
 const EditProfileScreen = () => {
   const navigation = useNavigation();
   const [formValues, handleFormValueChange, setFormValues] = formData();
+
+  const dispatch = useDispatch();
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const name = formValues.name;
+    const email = formValues.email;
+    const phone = formValues.phone;
+    const location = formValues.location;
+
+    dispatch(setName(name));
+    dispatch(setEmail(email));
+    dispatch(setPhone(phone));
+    dispatch(setLocation(location));
+    navigation.navigate("account");
+  };
+
   return (
-    <SafeAreaView style={styles.container}>
-      <ProductsHeader />
-      <ScrollView
-        contentInsetAdjustmentBehavior="always"
-        overScrollMode="always"
-        bounces={false}
-      >
+    <ScrollView
+      contentInsetAdjustmentBehavior="always"
+      overScrollMode="always"
+      bounces={false}
+      contentContainerStyle={{ flexGrow: 1 }}
+    >
+      <ProductsHeader className="sticky top-0" />
+      <SafeAreaView style={styles.container}>
         <Text className="pl-3 text-xl font-semibold py-3">
           Edit your account information
         </Text>
@@ -75,19 +99,15 @@ const EditProfileScreen = () => {
         />
 
         <TouchableOpacity
-          onPress={() =>
-            navigation.navigate("account", {
-              formValues,
-            })
-          }
+          onPress={handleSubmit}
           className="bg-yellow-500 m-3 p-2 items-center"
         >
           <Text className="text-lg font-bold text-gray-200">
             Save the Change
           </Text>
         </TouchableOpacity>
-      </ScrollView>
-    </SafeAreaView>
+      </SafeAreaView>
+    </ScrollView>
   );
 };
 

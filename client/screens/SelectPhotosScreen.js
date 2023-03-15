@@ -4,11 +4,16 @@ import { AssetsSelector } from "expo-images-picker";
 import { Ionicons } from "@expo/vector-icons";
 import { MediaType } from "expo-media-library";
 import { useNavigation } from "@react-navigation/native";
+import { SafeAreaView } from "react-native";
+import { useDispatch } from "react-redux";
+import { setCoverImage } from "../features/userSlice";
 
 const SelectPhotosScreen = () => {
+  const dispatch = useDispatch();
   const navigation = useNavigation();
   const onSuccess = (data) => {
-    navigation.navigate("account", { imageData: data });
+    dispatch(setCoverImage(data));
+    navigation.navigate("account");
   };
 
   const widgetErrors = useMemo(
@@ -31,8 +36,8 @@ const SelectPhotosScreen = () => {
       assetsType: [MediaType.photo, MediaType.video],
       minSelection: 1,
       maxSelection: 1,
-      portraitCols: 1,
-      landscapeCols: 1,
+      portraitCols: 3,
+      landscapeCols: 4,
     }),
     []
   );
@@ -49,10 +54,11 @@ const SelectPhotosScreen = () => {
 
   const _textStyle = {
     color: "white",
+    fontSize: 20,
   };
 
   const _buttonStyle = {
-    backgroundColor: "#0078AA",
+    backgroundColor: "orange",
     borderRadius: 5,
   };
 
@@ -99,14 +105,14 @@ const SelectPhotosScreen = () => {
   );
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <AssetsSelector
         Settings={widgetSettings}
         Errors={widgetErrors}
         Styles={widgetStyles}
         Navigator={widgetNavigator}
       />
-    </View>
+    </SafeAreaView>
   );
 };
 

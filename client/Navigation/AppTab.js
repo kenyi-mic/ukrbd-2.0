@@ -5,13 +5,6 @@ import HomeScreen from "../screens/HomeScreen";
 import StoreScreen from "../screens/StoreScreen";
 import CartScreen from "../screens/CartScreen";
 import ProfileScreen from "../screens/ProfileScreen";
-
-import {
-  BuildingStorefrontIcon,
-  HomeIcon,
-  ShoppingCartIcon,
-  UserIcon,
-} from "react-native-heroicons/solid";
 import { useSelector } from "react-redux";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import ProductsScreen from "../screens/ProductsScreen";
@@ -20,9 +13,15 @@ import EditProfileScreen from "../screens/EditProfileScreen";
 import ProfileImageScreen from "../screens/ProfileImageScreen";
 import SelectPhotosScreen from "../screens/SelectPhotosScreen";
 import AccountScreen from "../screens/AccountScreen";
+import { FontAwesome5, Ionicons } from "@expo/vector-icons";
+import {
+  selectBasketItems,
+  selectTotalQuantity,
+} from "../features/basketSlice";
 
 //Home children screen
 const Homestack = () => {
+  const quantity = useSelector(selectBasketItems);
   const Stack = createNativeStackNavigator();
   return (
     <Stack.Navigator>
@@ -82,16 +81,24 @@ const ProfileStack = () => {
 };
 
 const AppTab = () => {
-  const quantity = useSelector((state) => state.cart.quantity);
+  const quantity = useSelector(selectTotalQuantity);
 
   const Tab = createBottomTabNavigator();
   return (
-    <Tab.Navigator screenOptions={{ headerShown: false }}>
+    <Tab.Navigator
+      screenOptions={{
+        headerShown: false,
+        tabBarShowLabel: false,
+        tabBarActiveTintColor: "orange",
+      }}
+    >
       <Tab.Screen
         name="Home"
         component={Homestack}
         options={{
-          tabBarIcon: ({ color }) => <HomeIcon color={color} size={30} />,
+          tabBarIcon: ({ color }) => (
+            <Ionicons name="home" size={26} color={color} />
+          ),
         }}
       />
       <Tab.Screen
@@ -99,7 +106,7 @@ const AppTab = () => {
         component={StoreScreen}
         options={{
           tabBarIcon: ({ color }) => (
-            <BuildingStorefrontIcon color={color} size={30} />
+            <FontAwesome5 name="store" size={26} color={color} />
           ),
         }}
       />
@@ -108,16 +115,13 @@ const AppTab = () => {
         name="My Cart"
         component={CartScreen}
         options={{
+          tabBarBadge: quantity,
+          tabBarBadgeStyle: { color: "white", backgroundColor: "darkorange" },
           tabBarIcon: ({ color }) => (
             <>
               <View style={styles.cartIcon}>
-                <ShoppingCartIcon color={color} size={30} />
+                <FontAwesome5 name="shopping-cart" size={26} color={color} />
               </View>
-              {quantity !== 0 && (
-                <View style={styles.textwrapper}>
-                  <Text style={styles.text}>{quantity}</Text>
-                </View>
-              )}
             </>
           ),
         }}
@@ -126,7 +130,9 @@ const AppTab = () => {
         name="Profile"
         component={ProfileStack}
         options={{
-          tabBarIcon: ({ color }) => <UserIcon color={color} size={30} />,
+          tabBarIcon: ({ color }) => (
+            <FontAwesome5 name="user-alt" size={26} color={color} />
+          ),
         }}
       />
     </Tab.Navigator>
@@ -144,7 +150,7 @@ const styles = StyleSheet.create({
     height: 15,
     position: "absolute",
     borderRadius: 50,
-    
+
     top: 0,
     right: 32,
   },

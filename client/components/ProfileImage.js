@@ -2,20 +2,12 @@ import { View, Text, TouchableOpacity, Image, Pressable } from "react-native";
 import React, { useEffect, useState } from "react";
 import { CameraIcon } from "react-native-heroicons/solid";
 import { useNavigation, useRoute } from "@react-navigation/native";
+import { useSelector } from "react-redux";
 
 const ProfileImage = () => {
-  const [profileData, setProfileData] = useState([]);
-  const route = useRoute();
+  const data = useSelector((state) => state.user);
+  const profile = data.profileImage;
 
-  useEffect(() => {
-    if (!route.params) {
-      console.log("There is no data in this route function!");
-    } else {
-      if (route.params.profileData) {
-        setProfileData(route.params.profileData);
-      }
-    }
-  });
   const navigation = useNavigation();
 
   return (
@@ -35,7 +27,7 @@ const ProfileImage = () => {
         </Pressable>
       </TouchableOpacity>
       <View>
-        {profileData.map((item) => (
+        {profile.map((item) => (
           <TouchableOpacity
             onPress={() => navigation.navigate("select profile image")}
             key={item.id}

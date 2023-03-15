@@ -29,10 +29,16 @@ const Product = ({ id, name, image, images, description, price, rating }) => {
           rating,
         })
       }
-      className="bg-white w-40 mx-3 mb-4"
+      style={{
+        shadowColor: "#000",
+        shadowOffset: { width: 2, height: 2 },
+        shadowOpacity: 0.75,
+        elevation: 3,
+      }}
+      className="bg-white w-44 mx-1 mb-4 bg-re"
     >
       <Image
-        className="w-full h-40 rounded-sm"
+        className="w-44 h-40 rounded-sm"
         source={{ uri: urlFor(image).url() }}
         resizeMode="contain"
       />

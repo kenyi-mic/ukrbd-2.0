@@ -1,4 +1,4 @@
-import { View, Text, ScrollView } from "react-native";
+import { View, Text, ScrollView, StyleSheet } from "react-native";
 import React, { useEffect, useState } from "react";
 import { ArrowRightIcon } from "react-native-heroicons/solid";
 import ProductCard from "./ProductCard";
@@ -36,19 +36,15 @@ const FeaturedRow = ({ id, title, description }) => {
 
   return (
     <View>
-      <View className="mt-4 flex-row items-center justify-between px-4">
-        <Text className="font-bold text-lg">{title}</Text>
-        <ArrowRightIcon color="black" size={20} />
+      <View className="mt-2 flex-row items-center justify-between px-4">
+        <Text className="font-bold text-lg">{`${title} `}</Text>
+        <Text className="text-sm text-yellow-500 font-semibold">
+          Shop More{" > "}
+        </Text>
       </View>
-      <Text className="text-xs text-gray500 px-4">{description}</Text>
-      <ScrollView
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        contentContainerStyle={{ paddingHorizontal: 15 }}
-        className="pt-4"
-      >
+      <View style={styles.itemCards}>
         {/*ProductCards*/}
-        {products.map((product) => (
+        {products.slice(0, 4).map((product) => (
           <ProductCard
             key={product?._id}
             id={product?._id}
@@ -67,9 +63,20 @@ const FeaturedRow = ({ id, title, description }) => {
             }
           />
         ))}
-      </ScrollView>
+      </View>
     </View>
   );
 };
 
 export default FeaturedRow;
+
+const styles = StyleSheet.create({
+  itemCards: {
+    flex: 1,
+    flexDirection: "row",
+    flexWrap: "wrap",
+    gap: 5,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+});

@@ -22,6 +22,7 @@ import {
   removeFromBasket,
   selectBasketItems,
   selectBasketItemsWithID,
+  selectTotalQuantity,
 } from "../features/basketSlice";
 import ProductCarousel from "../components/Carousel/ProductCarousel";
 import { TouchableOpacity } from "react-native";
@@ -33,7 +34,7 @@ const ProductDetails = () => {
     params: { id, name, image, images, description, price, rating },
   } = useRoute();
   const dispatch = useDispatch();
-  const items = useSelector(selectBasketItems);
+  const quantity = useSelector(selectTotalQuantity);
 
   const product = useSelector((state) => selectBasketItemsWithID(state, id));
 
@@ -61,10 +62,10 @@ const ProductDetails = () => {
         >
           <ShoppingCartIcon color="#FF9900" size={40} />
           <Text
-            className="absolute right-0  text-xs text-gray-200 font-bold flex justify-items-center  bg-green-500 w-5 h-5  rounded-full text-center"
+            className="absolute right-0  text-xs text-gray-200 font-bold flex justify-items-center  bg-orange-500 w-5 h-5  rounded-full text-center"
             style={{ borderRadius: 9, overflow: "hidden" }}
           >
-            {items.length}
+            {quantity}
           </Text>
         </Pressable>
       </View>

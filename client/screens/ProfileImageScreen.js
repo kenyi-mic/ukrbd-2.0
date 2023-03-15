@@ -4,11 +4,15 @@ import { AssetsSelector } from "expo-images-picker";
 import { Ionicons } from "@expo/vector-icons";
 import { MediaType } from "expo-media-library";
 import { useNavigation } from "@react-navigation/native";
+import { useDispatch } from "react-redux";
+import { setProfileImage } from "../features/userSlice";
 
 const ProfileImageScreen = () => {
+  const dispatch = useDispatch();
   const navigation = useNavigation();
   const onSuccess = (data) => {
-    navigation.navigate("account", { profileData: data });
+    dispatch(setProfileImage(data));
+    navigation.navigate("account");
   };
 
   const widgetErrors = useMemo(
@@ -49,10 +53,11 @@ const ProfileImageScreen = () => {
 
   const _textStyle = {
     color: "white",
+    fontSize: 18,
   };
 
   const _buttonStyle = {
-    backgroundColor: "#0078AA",
+    backgroundColor: "orange",
     borderRadius: 5,
   };
 
@@ -79,7 +84,7 @@ const ProfileImageScreen = () => {
     () => ({
       margin: 2,
       bgColor: "white",
-      spinnerColor: "blue",
+      spinnerColor: "orange",
       widgetWidth: 99,
       videoIcon: {
         Component: Ionicons,

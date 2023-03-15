@@ -9,7 +9,6 @@ import {
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { ArrowLeftIcon, CameraIcon } from "react-native-heroicons/solid";
-import { useNavigation, useRoute } from "@react-navigation/native";
 import ProfileImage from "../components/ProfileImage";
 import { useSelector } from "react-redux";
 import { selectBasketItems } from "../features/basketSlice";
@@ -18,7 +17,6 @@ import { urlFor } from "../sanity";
 const AccountScreen = ({ navigation, route }) => {
   const items = useSelector(selectBasketItems);
   const [imageData, setImageData] = useState([]);
-  const [info, setInfo] = useState([]);
 
   const routeItem = route.params;
   useEffect(() => {
@@ -30,16 +28,12 @@ const AccountScreen = ({ navigation, route }) => {
       }
     }
   });
-  useEffect(() => {
-    if (!route.params) {
-      console.log("You didn't enter information");
-    } else {
-      if (route.params?.formValues) {
-        setInfo(route.params?.formValues);
-      }
-    }
-  });
 
+  const data = useSelector((state) => state.user);
+
+  const coverImage = data.coverImage;
+
+  console.log(data);
   return (
     <SafeAreaView className="flex-1 z-0">
       <ScrollView>
@@ -47,15 +41,16 @@ const AccountScreen = ({ navigation, route }) => {
 
         <View className="z-0 mb-16 ">
           <View className="w-full h-40 bg-gray-400">
-            {imageData === undefined ? (
+            {coverImage === undefined ? (
               <Image
                 className="w-full h-40 "
                 source={{
-                  uri: "https://images.unsplash.com/photo-1612538498456-e861df91d4d0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fGdyYXklMjBiYWNrZ3JvdW5kfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
+                  uri:
+                    "https://images.unsplash.com/photo-1612538498456-e861df91d4d0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fGdyYXklMjBiYWNrZ3JvdW5kfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
                 }}
               />
             ) : (
-              imageData.map((item) => (
+              coverImage.map((item) => (
                 <View className="w-full h-40" key={item.id}>
                   <Image
                     className="w-full h-40"
@@ -83,7 +78,7 @@ const AccountScreen = ({ navigation, route }) => {
           {/* peofile image*/}
           <ProfileImage />
           {/* username*/}
-          {info.length < 2 ? (
+          {data.length < 2 ? (
             <View id={routeItem?.id}>
               <Text className="text-2xl absolute -bottom-8 right-20">
                 {routeItem?.username}
@@ -96,11 +91,11 @@ const AccountScreen = ({ navigation, route }) => {
           ) : (
             <View>
               <Text className="text-2xl absolute -bottom-8 right-20">
-                {info.name}
+                {data.name}
               </Text>
               {/* email*/}
               <Text className="text-xs text-red-300 font-semibold absolute -bottom-12 right-16">
-                {info.email}
+                {data.email}
               </Text>
             </View>
           )}
@@ -128,13 +123,14 @@ const AccountScreen = ({ navigation, route }) => {
               {items.map((item) => (
                 <TouchableOpacity key={item.id} className="items-center">
                   <Image
-                    className="w-10 h-20  rounded"
+                    className="w-10 h-20  rounded-xs"
+                    resizeMode="contain"
                     source={{
                       uri: urlFor(item.image).url(),
                     }}
                   />
-                  <Text className="text-xs text-center font-semibold italic text-gray-500">
-                    {item.name}
+                  <Text className="text-xs text-center font-light italic text-gray-500">
+                    {`${item.name.substr(0, 5)}...`}
                   </Text>
                 </TouchableOpacity>
               ))}
@@ -153,7 +149,8 @@ const AccountScreen = ({ navigation, route }) => {
               <Image
                 className="w-10 h-20  rounded-xl"
                 source={{
-                  uri: "https://imgs.search.brave.com/jTyU-REwDGZQ0WOMTU5D4gtIRG4wgL9S56jpd_BWmy4/rs:fit:940:1112:1/g:ce/aHR0cHM6Ly9wbmdp/bWcuY29tL3VwbG9h/ZHMvaXBob25lXzEy/L2lwaG9uZV8xMl9Q/TkcxOS5wbmc",
+                  uri:
+                    "https://imgs.search.brave.com/jTyU-REwDGZQ0WOMTU5D4gtIRG4wgL9S56jpd_BWmy4/rs:fit:940:1112:1/g:ce/aHR0cHM6Ly9wbmdp/bWcuY29tL3VwbG9h/ZHMvaXBob25lXzEy/L2lwaG9uZV8xMl9Q/TkcxOS5wbmc",
                 }}
               />
               <Text className="text-xs text-center font-semibold italic text-gray-500">

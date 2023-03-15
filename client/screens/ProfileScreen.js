@@ -1,7 +1,6 @@
 import {
   Text,
   SafeAreaView,
-  Platform,
   StatusBar,
   StyleSheet,
   TouchableOpacity,
@@ -35,11 +34,12 @@ const ProfileScreen = () => {
 
   return (
     <SafeAreaView style={styles.Container}>
+      <StatusBar className="bg-orange-500" />
       <ScrollView>
         <View className="flex flex-row justify-between px-4 py-2 ">
           <LinearGradient
             // Background Linear Gradient
-            colors={["rgba(226,216,49,0.8)", "transparent"]}
+            colors={["orange", "transparent"]}
             style={styles.background}
           />
           {/*Logo*/}
@@ -159,7 +159,7 @@ const ProfileScreen = () => {
           <Text className="text-sm pb-2">
             Recheck items from your previous collections
           </Text>
-          <TouchableOpacity className="my-2 bg-yellow-300 p-2 w-40 items-center rounded">
+          <TouchableOpacity className="my-2 bg-orange-300 p-2 w-40 items-center rounded">
             <Text className="text-lg font-semibold text-gray-700">
               Visit Buy Again
             </Text>
@@ -171,9 +171,7 @@ const ProfileScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  Container: {
-    marginTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
-  },
+  Container: {},
   background: {
     position: "absolute",
     left: 0,

@@ -53,7 +53,7 @@ const ProductsScreen = () => {
             <Text className="text-3xl font-bold">{title}</Text>
             <Text className="text-gray-500 mt-2 mb-4">{description}</Text>
             <TouchableOpacity
-            style={styles.touchableOpacity}
+              style={styles.touchableOpacity}
               activeOpacity={1}
               onPress={() =>
                 navigation.navigate("collection", {
@@ -75,7 +75,6 @@ const ProductsScreen = () => {
           </View>
         </View>
         <View>
-          <Text className="px-4 py-6 font-bold text-xl">Products</Text>
           {rows?.map((row) => (
             <ProductRow
               key={row._id}
