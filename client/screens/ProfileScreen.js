@@ -127,26 +127,24 @@ const ProfileScreen = () => {
           <Text className="text-xl font-semibold text-gray-600 my-3">
             Shopping List
           </Text>
-          <TouchableOpacity
-            onPress={() => navigation.navigate("My Cart")}
-            className="rounded-lg border p-2 justify-between"
-          >
-            <Text className="text-sm ">Your shoping List</Text>
-            <ScrollView
-              horizontal={true}
-              showsHorizontalScrollIndicator={false}
+          <Text className="text-sm ">Your shoping List</Text>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate("My Cart")}
+              className="rounded-lg border p-2 flex-row justify-between"
             >
               {items.map((item) => (
                 <Image
                   key={item.id}
-                  className="w-10 h-20 mx-1 rounded- bg-gray-100 p-2"
+                  className="w-12 h-16 mx-1 rounded-sx bg-white"
+                  resizeMode="contain"
                   source={{
                     uri: urlFor(item?.image).url(),
                   }}
                 />
               ))}
-            </ScrollView>
-          </TouchableOpacity>
+            </TouchableOpacity>
+          </ScrollView>
         </View>
         {/* Ruler*/}
         <View className="w-full h-1 bg-gray-300 my-8"></View>

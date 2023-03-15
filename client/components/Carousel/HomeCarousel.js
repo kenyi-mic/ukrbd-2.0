@@ -1,5 +1,5 @@
 import { View, Animated } from "react-native";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { FlatList } from "react-native-gesture-handler";
 import SlideItem from "../SlideItem";
 import Pagination from "../Pagination";

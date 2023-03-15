@@ -118,12 +118,12 @@ const AccountScreen = ({ navigation, route }) => {
           <Text className="text-gray-700  text-xl font-bold">
             Shopping List
           </Text>
-          <View className="flex flex-row items-center">
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
             <View className="flex items-center space-x-1 flex-row my-2">
               {items.map((item) => (
                 <TouchableOpacity key={item.id} className="items-center">
                   <Image
-                    className="w-10 h-20  rounded-xs"
+                    className="w-10 h-14  rounded-xs bg-white"
                     resizeMode="contain"
                     source={{
                       uri: urlFor(item.image).url(),
@@ -135,7 +135,7 @@ const AccountScreen = ({ navigation, route }) => {
                 </TouchableOpacity>
               ))}
             </View>
-          </View>
+          </ScrollView>
         </View>
 
         {/* Ruler*/}
