@@ -1,23 +1,36 @@
-import { View, Text, StyleSheet, Image } from "react-native";
+import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import React from "react";
 import { urlFor } from "../sanity";
 import { Dimensions } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 const { width, height } = Dimensions.get("window");
 
 const SlideItem = ({ item }) => {
+  const navigation = useNavigation();
   return (
     <View key={item._id} style={styles.container}>
-      <Image
-        style={styles.image}
-        resizeMode="cover"
-        source={{ uri: urlFor(item?.image).url() }}
-      />
-      <View style={styles.content}>
-        <Text style={styles.title} className="z-10">
-          {item.title}
-        </Text>
-      </View>
+      <TouchableOpacity
+        onPress={() =>
+          navigation.navigate("category", {
+            id: item._id,
+            imgUrl: item.image,
+            title: item.title,
+            products: item.products,
+          })
+        }
+      >
+        <Image
+          style={styles.image}
+          resizeMode="cover"
+          source={{ uri: urlFor(item?.image).url() }}
+        />
+        <View style={styles.content}>
+          <Text style={styles.title} className="z-10">
+            {item.title}
+          </Text>
+        </View>
+      </TouchableOpacity>
     </View>
   );
 };

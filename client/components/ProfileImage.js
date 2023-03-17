@@ -27,7 +27,7 @@ const ProfileImage = () => {
         </Pressable>
       </TouchableOpacity>
       <View>
-        {profile.map((item) => (
+        {profile?.map((item) => (
           <TouchableOpacity
             onPress={() => navigation.navigate("select profile image")}
             key={item.id}

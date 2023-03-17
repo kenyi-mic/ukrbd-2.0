@@ -7,7 +7,7 @@ import {
   Pressable,
   TouchableOpacity,
 } from "react-native";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { ArrowLeftIcon, CameraIcon } from "react-native-heroicons/solid";
 import ProfileImage from "../components/ProfileImage";
 import { useSelector } from "react-redux";
@@ -16,24 +16,11 @@ import { urlFor } from "../sanity";
 
 const AccountScreen = ({ navigation, route }) => {
   const items = useSelector(selectBasketItems);
-  const [imageData, setImageData] = useState([]);
-
-  const routeItem = route.params;
-  useEffect(() => {
-    if (!route.params) {
-      console.log("There is no data in this route function!");
-    } else {
-      if (route.params?.imageData) {
-        setImageData(route.params.imageData);
-      }
-    }
-  });
 
   const data = useSelector((state) => state.user);
 
   const coverImage = data.coverImage;
 
-  console.log(data);
   return (
     <SafeAreaView className="flex-1 z-0">
       <ScrollView>
@@ -50,7 +37,7 @@ const AccountScreen = ({ navigation, route }) => {
                 }}
               />
             ) : (
-              coverImage.map((item) => (
+              coverImage?.map((item) => (
                 <View className="w-full h-40" key={item.id}>
                   <Image
                     className="w-full h-40"

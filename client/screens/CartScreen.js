@@ -58,8 +58,8 @@ const CartScreen = (id) => {
                 <Currency quantity={total + totalQuantity} currency="BDT" />
               </Text>
             </View>
-            <TouchableOpacity style={styles.touchableOpacity}
-            
+            <TouchableOpacity
+              style={styles.touchableOpacity}
               activeOpacity={0.7}
               className="bg-amber-400 lg:w-32 sm:w-11/12  items-center p-2 my-4 rounded"
             >
@@ -77,7 +77,7 @@ const CartScreen = (id) => {
 const styles = StyleSheet.create({
   touchableOpacity: {
     touchAction: "none",
-    elevation:5,
+    elevation: 5,
     shadowColor: "#000",
   },
   Container: {
